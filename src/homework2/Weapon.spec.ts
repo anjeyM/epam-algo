@@ -1,16 +1,11 @@
-// @ts-nocheck
-
 import { Weapon } from "./Weapon";
-
-// @ts-expect-error
-new Weapon("bow", 1, 0.5, 2, 1);
 
 class WeaponWithImplementation extends Weapon {
   polish() {}
 }
 
 describe("Weapon", () => {
-  let weapon;
+  let weapon: Weapon;
 
   beforeEach(() => {
     weapon = new WeaponWithImplementation("bow", 1, 0.5, 2, 1);

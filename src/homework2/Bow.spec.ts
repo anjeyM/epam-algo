@@ -1,12 +1,11 @@
-// @ts-nocheck
-
 import { Bow } from "./Bow";
+import { Item } from './Item';
 
 describe("Bow", () => {
-  let bow;
+  let bow: Bow;
 
   beforeEach(() => {
-    bow = new Bow(100, 0.9, 1, 1);
+    bow = new Bow(100, 0.9, new Item('bow', 1, 1));
   });
 
   it("should have proper name", () => {

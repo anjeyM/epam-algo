@@ -15,7 +15,7 @@ export class Item implements Comparable<Item> {
         this.weight = weight;
     }
 
-    resetIdCounter(): void {
+    static resetIdCounter(): void {
         Item.idCounter = 0;
     }
 
@@ -31,10 +31,15 @@ export class Item implements Comparable<Item> {
     }
 
     toString(): string {
-        return `${this.name} − Value: ${this.value}, Weight: ${this.weight}`;
+        return `${this.name} − Value: ${this.addTrailingZeros(this.value, 2)}, 
+        Weight: ${this.addTrailingZeros(this.weight, 2)}`;
     }
 
     getId(): number {
         return this.id;
     }
+
+    private addTrailingZeros(value: number, totalLength: number) {
+        return String(value).padEnd(totalLength, '0');
+      }
 }

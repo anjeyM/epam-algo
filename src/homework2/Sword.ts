@@ -3,7 +3,7 @@ import { Item } from "./Item";
 
 export class Sword extends Weapon {
 
-    constructor(private item: Item, baseDamage: number, baseDurability: number) {
+    constructor(baseDamage: number, baseDurability: number, private item: Item) {
         super(item, baseDamage, baseDurability);
         this.name = 'sword';
     }

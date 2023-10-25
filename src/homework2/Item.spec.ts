@@ -1,8 +1,5 @@
-// @ts-nocheck
-
 import { Item } from "./Item";
 
-// @ts-expect-error
 new Item("ring", 2, 1);
 
 class ItemWithImplementation extends Item {

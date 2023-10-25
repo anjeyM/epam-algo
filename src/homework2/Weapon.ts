@@ -13,8 +13,6 @@ export abstract class Weapon extends Item {
         protected durabilityModifier?: number,
         ) {
             super(item.name, item.value, item.weight);
-            this.value = item.value;
-            this.weight = item.weight;
             this.baseDamage = baseDamage;
             this.baseDurability = baseDurability;
         }
