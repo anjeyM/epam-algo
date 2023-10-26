@@ -1,19 +1,19 @@
 import { Item } from './Item';
 export class Consumable extends Item {
     isConsumed = false;
-    private isSpoiled = false;
+    isSpoiled: boolean;
 
-    constructor(item: Item, isSpoiled: boolean) {
+    constructor(item: Item, isSpoiled?: boolean) {
         super(item.name, item.value, item.weight);
-        this.isSpoiled = isSpoiled;
+        this.isSpoiled = isSpoiled || false;
     }
 
     use() {
         if (this.isConsumed) {
-            return `There is nothing left of the ${this.name} to consume.`;
+            return `There's nothing left of the ${this.name} to consume.`;
         }
         if (this.isSpoiled) {
-            return `You consumed the ${this.name}.` + `\n You feel sick.`
+            return `You consumed the ${this.name}.` + `\nYou feel sick.`
         }
         return `You consumed the ${this.name}.`;
     }
