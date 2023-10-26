@@ -28,12 +28,11 @@ export class Item implements Comparable<Item> {
         if (this.value === other.value && this.weight === other.weight) {
             return this.name.localeCompare(other.name);
         }
-        return this.value > other.value && this.weight > other.weight ? 1 : -1;
+        return this.value > other.value ? 1 : -1;
     }
 
     toString(): string {
-        return `${this.name} − Value: ${addTrailingZeros(this.value, 2)}, 
-        Weight: ${addTrailingZeros(this.weight, 2)}`;
+        return `${this.name} − Value: ${addTrailingZeros(this.value, 4)}, Weight: ${addTrailingZeros(this.weight, 4)}`;
     }
 
     getId(): number {
