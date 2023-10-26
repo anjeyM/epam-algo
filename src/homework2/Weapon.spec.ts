@@ -1,4 +1,5 @@
 import { Weapon } from "./Weapon";
+import { Item } from './Item';
 
 class WeaponWithImplementation extends Weapon {
   polish() {}
@@ -8,7 +9,7 @@ describe("Weapon", () => {
   let weapon: Weapon;
 
   beforeEach(() => {
-    weapon = new WeaponWithImplementation("bow", 1, 0.5, 2, 1);
+    weapon = new WeaponWithImplementation(new Item("bow", 2, 1), 1, 0.5);
   });
 
   it("should have proper fields", () => {
@@ -37,14 +38,14 @@ describe("Weapon", () => {
     });
 
     it("should return proper string for weapon that breaks", () => {
-      weapon = new WeaponWithImplementation("bow", 1, 0.05, 2, 1);
+      weapon = new WeaponWithImplementation(new Item("bow", 2, 1), 1, 0.05);
 
       expect(weapon.use()).toEqual("You use the bow, dealing 0.05 points of damage.\nThe bow breaks.");
       expect(weapon.toString()).toEqual("bow − Value: 2.00, Weight: 1.00, Damage: 1.00, Durability: 0.00%");
     });
 
     it("should return proper string for weapon that is already broken", () => {
-      weapon = new WeaponWithImplementation("bow", 1, 0.05, 2, 1);
+      weapon = new WeaponWithImplementation(new Item("bow", 2, 1), 1, 0.05);
 
       weapon.use();
 

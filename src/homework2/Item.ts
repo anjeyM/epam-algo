@@ -1,4 +1,5 @@
 import {Comparable} from './Comparable';
+import {addTrailingZeros} from './helper';
 
 export class Item implements Comparable<Item> {
     static idCounter = 1;
@@ -31,15 +32,11 @@ export class Item implements Comparable<Item> {
     }
 
     toString(): string {
-        return `${this.name} − Value: ${this.addTrailingZeros(this.value, 2)}, 
-        Weight: ${this.addTrailingZeros(this.weight, 2)}`;
+        return `${this.name} − Value: ${addTrailingZeros(this.value, 2)}, 
+        Weight: ${addTrailingZeros(this.weight, 2)}`;
     }
 
     getId(): number {
         return this.id;
     }
-
-    private addTrailingZeros(value: number, totalLength: number) {
-        return String(value).padEnd(totalLength, '0');
-      }
 }
