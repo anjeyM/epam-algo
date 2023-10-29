@@ -27,11 +27,22 @@ export enum SortBy {
 }
 
 export const show = (sortBy: SortBy) => (clients: Array<ClientUser>) => (executor: ExecutorUser): Either<string, string> => {
+  const matchingClients = clients.filter(client => {
+    return client.demands._tag === 'Some' &&
+           client.demands.value.every(demand => executor.possibilities.includes(demand));
+  });
 
+  if (matchingClients.length === clients.length) {
+    return right('This executor meets all demands of all clients!');
+  } else if (matchingClients.length > 0) {
+    return right(`This executor meets the demands of only ${matchingClients.length} out of ${clients.length} clients.`);
+  } else {
+    return left('This executor cannot meet the demands of any client!');
+  }
 };
 
-export const main = (sortBy: SortBy): Promise<string> => (
-  Promise
+export const main = (sortBy: SortBy): Promise<string> => {
+  return Promise
     .all([getClients(), getExecutor()]) // Fetch clients and executor
     .then(([clients, executor]) => (
       pipe(
@@ -47,4 +58,4 @@ export const main = (sortBy: SortBy): Promise<string> => (
         getOrElse((err) => err) // In case of any left (error) value, it would be stopped and show error. So, if clients or executor is left, the show would not be called, but onLeft in getOrElse would be called
       )
     ))
-);
+};
