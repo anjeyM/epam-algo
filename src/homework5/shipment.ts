@@ -1,3 +1,4 @@
+import {CentsPerOunce, ShipCompany} from './types/types';
 export class Shipment {
     private static shipment: Shipment;
     private static nextShipmentID = 1;
@@ -26,7 +27,7 @@ export class Shipment {
 
     public static getInstance(): Shipment {
         if (!Shipment.shipment) {
-            Shipment.shipment = new Shipment(1,'Default adress','default zip','','')
+            Shipment.shipment = new Shipment(1,'Default adress','1','','1')
         }
 
         return Shipment.shipment;
@@ -36,12 +37,8 @@ export class Shipment {
         return Shipment.nextShipmentID++;
     }
 
-    public static ship(): string {
-        return '';
-    }
-
     ship(): string {
-        const cost = this.weight * 0.39;
+        const cost = this.weight * CentsPerOunce[ShipCompany.AIR_EAST];
         return `Shipment ID: ${this.shipmentID}, From: ${this.fromAddress} - ${this.fromZipCode}, To: ${this.toAddress} - ${this.toZipCode}, Cost: $${cost.toFixed(2)}`;
-      }
+    }
 }
