@@ -1,6 +1,6 @@
-import {ShipmentType} from './types/types';
+import {ShipmentType, ShipmentInterface} from './types/types';
 import {Shipper} from './shipper';
-export class Shipment {
+export class Shipment implements ShipmentInterface {
     private static shipment: Shipment;
     private static nextShipmentID = 1;
 

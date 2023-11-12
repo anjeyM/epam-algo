@@ -62,3 +62,13 @@ export const companyToShipmentType: CompanyShippentPrices = {
         {type: ShipmentType.OVERSIZED, price: {value: 0.02, type: PriceType.ADDITIONAL}},
     ],
 }
+
+export interface ShipmentInterface {
+    ship(): string,
+}
+
+export enum ShipmentCodes {
+    MARK_FRAGILE = '\n**MARK FRAGILE**',
+    MARK_DO_NOT_LEAVE = '\n**MARK DO NOT LEAVE IF ADDRESS NOT AT HOME**',
+    MARK_RETURN_RECEIPT_REQUESTED = '\n**MARK RETURN RECEIPT REQUESTED**',
+}
