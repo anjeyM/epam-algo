@@ -1,5 +1,6 @@
-import { Shipment } from "./shipment";
+import {Shipment} from "./shipment";
 import {ShipmentType} from './types/types';
+import {Shipper} from './shipper';
 export class Client {
     private shipment: Shipment;
 
@@ -10,8 +11,10 @@ export class Client {
         fromZipCode: string,
         toAddress: string,
         toZipCode: string,
+        shipper: Shipper,
         shipmentID?: number,) {
-            this.shipment = new Shipment(weight, weight2, fromAddress, fromZipCode, toAddress, toZipCode, shipmentID);
+            this.shipment = Shipment.instance;
+            this.shipment.configure(weight, weight2, fromAddress, fromZipCode, toAddress, toZipCode, shipper, shipmentID);
     }
 
     shipItem(): void {

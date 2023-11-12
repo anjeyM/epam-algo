@@ -4,40 +4,45 @@ export class Shipment implements ShipmentInterface {
     private static shipment: Shipment;
     private static nextShipmentID = 1;
 
-    private weight: number;
-    private weight2: ShipmentType;
-    private shipmentID: number;
-    private fromAddress: string;
-    private fromZipCode: string;
-    private toAddress: string;
-    private toZipCode: string;
+    private weight: number = 0;
+    private weight2: ShipmentType = ShipmentType.LETTER;
+    private shipmentID: number = Shipment.getShipmentId();
+    private fromAddress: string = '';
+    private fromZipCode: string = '';
+    private toAddress: string = '';
+    private toZipCode: string = '';
 
-    private shipper: Shipper;
+    private shipper: Shipper = new Shipper();
 
-    constructor(
-        weight: number,
-        weight2: ShipmentType,
-        fromAddress: string,
-        fromZipCode: string,
-        toAddress: string,
-        toZipCode: string,
-        shipmentID?: number) {
-            this.weight = weight;
-            this.weight2 = weight2 || ShipmentType.LETTER;
-            this.shipmentID = shipmentID || Shipment.getShipmentId();
-            this.fromAddress = fromAddress;
-            this.fromZipCode = fromZipCode;
-            this.toAddress = toAddress;
-            this.toZipCode = toZipCode;
-            this.shipper = new Shipper();
-    }
+    private constructor() {}
 
-    public static getInstance(): Shipment {
+    public static get instance(): Shipment {
         if (!Shipment.shipment) {
-            Shipment.shipment = new Shipment(1, ShipmentType.LETTER, 'Default adress','123','Default adress','456')
+            Shipment.shipment = new Shipment()
         }
 
-        return Shipment.shipment;
+        return this.shipment || (this.shipment = new this());
+    }
+
+    public configure(
+            weight: number,
+            weight2: ShipmentType,
+            fromAddress: string,
+            fromZipCode: string,
+            toAddress: string,
+            toZipCode: string,
+            shipper: Shipper,
+            shipmentID?: number,
+        )
+    {
+        this.weight = weight;
+        this.weight2 = weight2 || ShipmentType.LETTER;
+        this.fromAddress = fromAddress;
+        this.fromZipCode = fromZipCode;
+        this.toAddress = toAddress;
+        this.toZipCode = toZipCode;
+        this.shipper = shipper || new Shipper();
+        this.shipmentID = shipmentID || Shipment.getShipmentId();
     }
 
     public static getShipmentId(): number {
